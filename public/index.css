@@ -1,0 +1,80 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ffecd2, #fcb69f);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.container {
+  width: 500px;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+textarea, input, select {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  background: #ff7f50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff6347;
+}
+
+.reply {
+  margin-top: 20px;
+  min-height: 50px;
+  padding: 10px;
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+/* Mr Money animated holographic text */
+.mr-money-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.mr-money {
+  font-size: 6rem;
+  font-family: 'Pacifico', cursive;
+  font-weight: bold;
+  background: linear-gradient(45deg, #FFD700, #FFA500, #FFFACD, #FFD700);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holographic 3s ease infinite;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
+
+@keyframes holographic {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

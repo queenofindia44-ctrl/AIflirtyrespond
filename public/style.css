@@ -1,0 +1,268 @@
+/* --- 1. Global & Base Setup --- */
+:root {
+    --dark-bg: #1e112d;
+    --panel-bg: rgba(30, 17, 45, 0.9); /* Slightly more transparent */
+    --accent-pink: #ff1493; 
+    --accent-red: #ff3366; 
+    --text-light: #f4f4f9;
+    --text-secondary: #c0c0d0;
+    --border-radius-large: 15px; /* Larger radius for softer look */
+    --border-radius-small: 10px;
+}
+
+body {
+    background-color: #333; 
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 0;
+    margin: 0;
+    overflow-x: hidden;
+    position: relative;
+    perspective: 1000px; /* For 3D transforms */
+}
+
+/* --- Animated Hearts Background (Enhanced) --- */
+.heart-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+    /* Richer background gradient */
+    background: radial-gradient(circle at center, #8a419c 0%, #1a0f2e 100%);
+}
+
+.heart {
+    position: absolute;
+    bottom: -10%;
+    /* Heart color randomized by JS */
+    font-size: 2em; 
+    animation-timing-function: cubic-bezier(0.5, 0.1, 0.5, 0.9); /* More organic movement */
+    pointer-events: none;
+    text-shadow: 0 0 8px rgba(255, 182, 193, 0.7); /* Stronger glow */
+}
+
+.heart::before {
+    content: '❤️'; 
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: var(--opacity);
+    }
+    50% {
+        transform: translateY(-50vh) rotate(180deg) scale(1.1);
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg) scale(1.3); 
+        opacity: 0;
+    }
+}
+/* Apply the enhanced animation */
+.heart {
+    animation-name: floatUp;
+}
+
+/* --- Main Container & Layout --- */
+.main-container {
+    width: 95%;
+    max-width: 1050px;
+    background: rgba(18, 9, 29, 0.95); /* Nearly opaque background */
+    border-radius: 20px; /* Very large radius */
+    box-shadow: 0 15px 40px rgba(255, 20, 147, 0.4), 0 0 50px rgba(0, 0, 0, 0.8); /* Dramatic shadow */
+    padding: 40px 50px;
+    z-index: 10; 
+    backdrop-filter: blur(8px); /* Stronger frosted glass effect */
+    border: 3px solid var(--accent-pink); /* Stronger border */
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy entrance transition */
+}
+
+.main-container:hover {
+    transform: perspective(1000px) rotateX(1deg) scale(1.005); /* Subtle 3D tilt on hover */
+}
+
+/* --- 2. Header & Title --- */
+.app-header-integrated {
+    text-align: center;
+    padding-bottom: 30px;
+    margin-bottom: 25px;
+    border-bottom: 3px solid; /* Thicker separator */
+    border-image: linear-gradient(to right, transparent 5%, var(--accent-red), var(--accent-pink), transparent 95%) 1;
+}
+
+.app-title {
+    font-size: 4em; /* Larger title */
+    color: var(--text-light);
+    text-shadow: 0 0 15px var(--accent-pink), 0 0 30px var(--accent-red);
+}
+
+.app-subtitle {
+    font-size: 1.2em;
+    color: var(--text-secondary);
+    margin-top: 10px;
+}
+
+/* --- 3. Main Content Structure & Panel Animation --- */
+.content-wrapper {
+    display: flex;
+    gap: 40px; /* Wider gap */
+    margin-bottom: 40px;
+}
+
+.panel {
+    background: var(--panel-bg);
+    border-radius: var(--border-radius-large);
+    padding: 35px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    flex: 1;
+    min-height: 480px; /* Ensure visual height */
+    border: 1px solid rgba(255, 20, 147, 0.4);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.panel:hover {
+    transform: translateY(-8px) scale(1.01); /* Dramatic lift on hover */
+    box-shadow: 0 15px 35px rgba(255, 20, 147, 0.3), 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.section-title {
+    font-size: 1.6em;
+    font-weight: 700;
+    padding-bottom: 12px;
+    border-bottom: 3px solid;
+    border-image: linear-gradient(to right, var(--accent-red), var(--accent-pink), transparent) 1;
+    color: var(--accent-pink);
+    text-shadow: 0 0 8px rgba(255, 20, 147, 0.5);
+}
+
+/* --- 4. Input/Select Styling (Jaw-Dropping Gradient Pulse) --- */
+
+/* Keyframes for the repeating gradient shimmer */
+@keyframes inputShimmer {
+    0% { border-image-source: linear-gradient(90deg, #ffb6c1, var(--accent-pink)); }
+    100% { border-image-source: linear-gradient(90deg, var(--accent-pink), #ffb6c1); }
+}
+
+.input-element {
+    width: calc(100% - 20px);
+    padding: 18px 15px; /* More padding */
+    background: rgba(58, 42, 81, 0.8);
+    border: 3px solid transparent; /* Required for border-image */
+    border-image: linear-gradient(45deg, var(--accent-red), var(--accent-pink)) 1;
+    border-radius: var(--border-radius-small);
+    color: var(--text-light);
+    font-size: 1.1em;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+    font-family: inherit;
+    animation: inputShimmer 3s infinite alternate; /* Apply gradient shimmer */
+}
+
+.input-element:focus {
+    border-color: var(--accent-red);
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.6), inset 0 0 8px rgba(255, 51, 102, 0.4);
+    transform: scale(1.02);
+    background: rgba(58, 42, 81, 0.95);
+    animation: none; /* Stop shimmer on focus */
+}
+
+.dropdown-element {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF1493'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+}
+
+/* --- 5. Generate Button (Explosive Animation) --- */
+.generate-button {
+    width: 100%;
+    margin-top: 40px;
+    padding: 20px 25px; /* Large padding */
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-pink));
+    font-size: 1.2em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 25px rgba(255, 20, 147, 0.7); /* Explosive shadow */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy transition */
+}
+
+.generate-button:hover {
+    background: linear-gradient(90deg, var(--accent-pink), var(--accent-red));
+    box-shadow: 0 12px 30px rgba(255, 20, 147, 0.9), 0 0 50px rgba(255, 51, 102, 0.5);
+    transform: translateY(-5px) scale(1.03) rotate(1deg); /* Lift, scale, and slight rotation */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 8px 25px rgba(255, 20, 147, 0.7); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 20, 147, 0.0); }
+    100% { transform: scale(1); box-shadow: 0 8px 25px rgba(255, 20, 147, 0.7); }
+}
+
+/* --- 6. Response Area & Mr Money (Intense Glow) --- */
+.response-panel {
+    background: var(--panel-bg);
+    border-radius: var(--border-radius-large);
+    padding: 35px;
+    margin-top: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 20, 147, 0.4);
+}
+
+.response-text {
+    background-color: rgba(58, 42, 81, 0.8);
+    padding: 25px;
+    border-radius: var(--border-radius-small);
+    border-left: 8px solid var(--accent-pink); /* Thicker border */
+    color: var(--text-light);
+    line-height: 1.7;
+    font-size: 1.05em;
+    min-height: 80px;
+    transition: opacity 1s ease-in, transform 1s ease-in;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.response-text.fade-in-animation {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#mr-money-label {
+    font-size: 2.5em; 
+    font-weight: 700;
+    text-shadow: 0 0 15px #ffd700, 0 0 30px #ff8c00, 0 0 45px rgba(255, 215, 0, 0.7); /* Triple-layer glow */
+    animation: goldPulse 2s infinite alternate;
+    transition: transform 0.5s ease;
+}
+
+@keyframes goldPulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.07); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+/* --- Media Queries --- */
+@media (max-width: 900px) {
+    .content-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .panel {
+        min-height: auto;
+        padding: 30px;
+    }
+    .main-container {
+        padding: 30px 40px;
+    }
+    .app-title {
+        font-size: 3em;
+    }
+}
